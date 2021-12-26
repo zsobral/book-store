@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Setup Realm CLI
+        run: |
+          npm install -g mongodb-realm-cli
+          realm-cli login --api-key="${{ secrets.REALM_API_PUBLIC_KEY }}" --private-api-key="${{ secrets.REALM_API_PRIVATE_KEY }}"
+
+      - name: Build app
+        run: |
+          yarn install
+          yarn build
+        working-directory: web
+
+      - name: Deploy
+        run: realm-cli push --remote ${{ secrets.REALM_APP_ID }} --local realm --include-hosting --yes

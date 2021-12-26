@@ -1,0 +1,7 @@
+{
+    "app_id": "book-store-eewbr",
+    "config_version": 20210101,
+    "name": "Book-Store",
+    "location": "US-VA",
+    "deployment_model": "LOCAL"
+}
