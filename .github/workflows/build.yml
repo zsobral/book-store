@@ -27,4 +27,6 @@ jobs:
         working-directory: web
 
       - name: Deploy
-        run: realm-cli push --remote ${{ secrets.REALM_APP_ID }} --local realm --include-hosting --yes
+        run: |
+          mv web/out realm/hosting/files
+          realm-cli push --remote ${{ secrets.REALM_APP_ID }} --local realm --include-hosting --yes
