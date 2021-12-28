@@ -5,7 +5,7 @@ import { SignInForm, useAuth } from "../../auth";
 
 export default function Auth() {
   const { user } = useAuth();
-  const isAuthenticated = user !== null;
+  const isAuthenticated = user !== null && user.isAnonymous === false;
   const router = useRouter();
 
   useEffect(() => {

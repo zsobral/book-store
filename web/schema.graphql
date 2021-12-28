@@ -1,0 +1,183 @@
+scalar ObjectId
+
+enum UserSortByInput {
+  ROLE_ASC
+  ROLE_DESC
+  USERID_ASC
+  USERID_DESC
+  _ID_ASC
+  _ID_DESC
+}
+
+type Book {
+  _id: ObjectId
+  description: String
+  slug: String
+  title: String
+}
+
+input BookQueryInput {
+  description_gt: String
+  slug_gte: String
+  description_lt: String
+  slug_lte: String
+  description_gte: String
+  _id_lte: ObjectId
+  slug_in: [String]
+  _id_gt: ObjectId
+  description: String
+  slug_exists: Boolean
+  title_ne: String
+  _id_exists: Boolean
+  description_lte: String
+  slug_lt: String
+  _id_gte: ObjectId
+  _id_lt: ObjectId
+  OR: [BookQueryInput!]
+  title_exists: Boolean
+  description_in: [String]
+  description_exists: Boolean
+  description_nin: [String]
+  title_lte: String
+  title_nin: [String]
+  title_lt: String
+  title_gte: String
+  _id: ObjectId
+  _id_ne: ObjectId
+  slug: String
+  _id_nin: [ObjectId]
+  slug_gt: String
+  slug_nin: [String]
+  title_in: [String]
+  AND: [BookQueryInput!]
+  _id_in: [ObjectId]
+  title_gt: String
+  slug_ne: String
+  title: String
+  description_ne: String
+}
+
+input UserQueryInput {
+  role_ne: UserRole
+  role_lte: UserRole
+  _id_ne: ObjectId
+  userId_lte: String
+  userId_in: [String]
+  AND: [UserQueryInput!]
+  role_nin: [UserRole]
+  role_in: [UserRole]
+  role_gt: UserRole
+  userId_exists: Boolean
+  role_lt: UserRole
+  role_gte: UserRole
+  userId_gte: String
+  OR: [UserQueryInput!]
+  userId: String
+  role: UserRole
+  userId_lt: String
+  userId_nin: [String]
+  userId_gt: String
+  _id_gt: ObjectId
+  _id_in: [ObjectId]
+  _id_exists: Boolean
+  _id_nin: [ObjectId]
+  _id_gte: ObjectId
+  userId_ne: String
+  _id_lte: ObjectId
+  _id_lt: ObjectId
+  role_exists: Boolean
+  _id: ObjectId
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+input BookUpdateInput {
+  title: String
+  title_unset: Boolean
+  _id: ObjectId
+  _id_unset: Boolean
+  description: String
+  description_unset: Boolean
+  slug: String
+  slug_unset: Boolean
+}
+
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+
+type User {
+  _id: ObjectId
+  role: UserRole
+  userId: String
+}
+
+input UserInsertInput {
+  _id: ObjectId
+  role: UserRole
+  userId: String
+}
+
+enum BookSortByInput {
+  TITLE_DESC
+  _ID_ASC
+  _ID_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  SLUG_ASC
+  SLUG_DESC
+  TITLE_ASC
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+type Query {
+  book(query: BookQueryInput): Book
+  books(query: BookQueryInput, limit: Int = 100, sortBy: BookSortByInput): [Book]!
+  user(query: UserQueryInput): User
+  users(query: UserQueryInput, limit: Int = 100, sortBy: UserSortByInput): [User]!
+}
+
+enum UserRole {
+  ADMIN
+}
+
+type Mutation {
+  deleteManyBooks(query: BookQueryInput): DeleteManyPayload
+  deleteManyUsers(query: UserQueryInput): DeleteManyPayload
+  deleteOneBook(query: BookQueryInput!): Book
+  deleteOneUser(query: UserQueryInput!): User
+  insertManyBooks(data: [BookInsertInput!]!): InsertManyPayload
+  insertManyUsers(data: [UserInsertInput!]!): InsertManyPayload
+  insertOneBook(data: BookInsertInput!): Book
+  insertOneUser(data: UserInsertInput!): User
+  replaceOneBook(query: BookQueryInput, data: BookInsertInput!): Book
+  replaceOneUser(query: UserQueryInput, data: UserInsertInput!): User
+  updateManyBooks(query: BookQueryInput, set: BookUpdateInput!): UpdateManyPayload
+  updateManyUsers(query: UserQueryInput, set: UserUpdateInput!): UpdateManyPayload
+  updateOneBook(query: BookQueryInput, set: BookUpdateInput!): Book
+  updateOneUser(query: UserQueryInput, set: UserUpdateInput!): User
+  upsertOneBook(query: BookQueryInput, data: BookInsertInput!): Book
+  upsertOneUser(query: UserQueryInput, data: UserInsertInput!): User
+}
+
+input BookInsertInput {
+  _id: ObjectId
+  description: String
+  slug: String
+  title: String
+}
+
+input UserUpdateInput {
+  role: UserRole
+  role_unset: Boolean
+  userId: String
+  userId_unset: Boolean
+  _id: ObjectId
+  _id_unset: Boolean
+}

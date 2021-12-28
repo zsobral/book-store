@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 export interface User {
   id: string;
   email: string | null;
+  isAdmin: boolean;
+  isAnonymous: boolean;
 }
 
 export interface AuthContextValue {
@@ -16,6 +18,6 @@ export interface AuthProviderProps {
   children: ReactNode;
 }
 
-export interface RequireAuthProps {
+export interface RequireAdminProps {
   children: ReactNode;
 }
