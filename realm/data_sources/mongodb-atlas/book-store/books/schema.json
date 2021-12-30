@@ -3,8 +3,17 @@
         "_id": {
             "bsonType": "objectId"
         },
+        "authors": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
+        },
         "description": {
             "bsonType": "string"
+        },
+        "price": {
+            "bsonType": "number"
         },
         "slug": {
             "bsonType": "string"
@@ -13,5 +22,9 @@
             "bsonType": "string"
         }
     },
+    "required": [
+        "title",
+        "slug"
+    ],
     "title": "book"
 }

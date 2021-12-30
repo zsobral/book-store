@@ -1,7 +1,17 @@
-import type { InputProps } from "@chakra-ui/react";
+import type {
+  InputProps,
+  TextareaProps,
+  NumberInputFieldProps as ChakraNumberInputFieldProps,
+} from "@chakra-ui/react";
 
-export interface InputFieldProps extends InputProps {
+interface FieldProps {
   label: string;
   id: string;
   error: any;
 }
+
+export type InputFieldProps = InputProps & FieldProps;
+
+export type TextareaFieldProps = TextareaProps & FieldProps;
+
+export type NumberInputFieldProps = ChakraNumberInputFieldProps & FieldProps;

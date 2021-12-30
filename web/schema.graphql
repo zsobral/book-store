@@ -1,140 +1,24 @@
-scalar ObjectId
-
-enum UserSortByInput {
-  ROLE_ASC
-  ROLE_DESC
-  USERID_ASC
-  USERID_DESC
-  _ID_ASC
-  _ID_DESC
-}
-
-type Book {
-  _id: ObjectId
-  description: String
-  slug: String
-  title: String
-}
-
-input BookQueryInput {
-  description_gt: String
-  slug_gte: String
-  description_lt: String
-  slug_lte: String
-  description_gte: String
-  _id_lte: ObjectId
-  slug_in: [String]
-  _id_gt: ObjectId
-  description: String
-  slug_exists: Boolean
-  title_ne: String
-  _id_exists: Boolean
-  description_lte: String
-  slug_lt: String
-  _id_gte: ObjectId
-  _id_lt: ObjectId
-  OR: [BookQueryInput!]
-  title_exists: Boolean
-  description_in: [String]
-  description_exists: Boolean
-  description_nin: [String]
-  title_lte: String
-  title_nin: [String]
-  title_lt: String
-  title_gte: String
-  _id: ObjectId
-  _id_ne: ObjectId
-  slug: String
-  _id_nin: [ObjectId]
-  slug_gt: String
-  slug_nin: [String]
-  title_in: [String]
-  AND: [BookQueryInput!]
-  _id_in: [ObjectId]
-  title_gt: String
-  slug_ne: String
-  title: String
-  description_ne: String
-}
-
-input UserQueryInput {
-  role_ne: UserRole
-  role_lte: UserRole
-  _id_ne: ObjectId
-  userId_lte: String
-  userId_in: [String]
-  AND: [UserQueryInput!]
-  role_nin: [UserRole]
-  role_in: [UserRole]
-  role_gt: UserRole
-  userId_exists: Boolean
-  role_lt: UserRole
-  role_gte: UserRole
-  userId_gte: String
-  OR: [UserQueryInput!]
-  userId: String
-  role: UserRole
-  userId_lt: String
-  userId_nin: [String]
-  userId_gt: String
-  _id_gt: ObjectId
-  _id_in: [ObjectId]
-  _id_exists: Boolean
-  _id_nin: [ObjectId]
-  _id_gte: ObjectId
-  userId_ne: String
-  _id_lte: ObjectId
-  _id_lt: ObjectId
-  role_exists: Boolean
-  _id: ObjectId
-}
-
-type InsertManyPayload {
-  insertedIds: [ObjectId]!
-}
-
-input BookUpdateInput {
-  title: String
-  title_unset: Boolean
-  _id: ObjectId
-  _id_unset: Boolean
-  description: String
-  description_unset: Boolean
-  slug: String
-  slug_unset: Boolean
-}
-
 type DeleteManyPayload {
   deletedCount: Int!
 }
 
-type User {
+input BookUpdateInput {
+  authors: [String]
+  title_unset: Boolean
+  price_unset: Boolean
   _id: ObjectId
-  role: UserRole
-  userId: String
+  description: String
+  authors_unset: Boolean
+  price_inc: Float
+  _id_unset: Boolean
+  slug_unset: Boolean
+  slug: String
+  title: String
+  price: Float
+  description_unset: Boolean
 }
 
-input UserInsertInput {
-  _id: ObjectId
-  role: UserRole
-  userId: String
-}
-
-enum BookSortByInput {
-  TITLE_DESC
-  _ID_ASC
-  _ID_DESC
-  DESCRIPTION_ASC
-  DESCRIPTION_DESC
-  SLUG_ASC
-  SLUG_DESC
-  TITLE_ASC
-}
-
-type UpdateManyPayload {
-  matchedCount: Int!
-  modifiedCount: Int!
-}
+scalar ObjectId
 
 type Query {
   book(query: BookQueryInput): Book
@@ -143,8 +27,123 @@ type Query {
   users(query: UserQueryInput, limit: Int = 100, sortBy: UserSortByInput): [User]!
 }
 
-enum UserRole {
-  ADMIN
+enum BookSortByInput {
+  _ID_ASC
+  TITLE_DESC
+  SLUG_ASC
+  SLUG_DESC
+  TITLE_ASC
+  PRICE_ASC
+  PRICE_DESC
+  _ID_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+}
+
+type Book {
+  _id: ObjectId
+  authors: [String]
+  description: String
+  price: Float
+  slug: String!
+  title: String!
+}
+
+type User {
+  _id: ObjectId
+  role: UserRole
+  userId: String
+}
+
+input BookInsertInput {
+  description: String
+  slug: String!
+  title: String!
+  authors: [String]
+  price: Float
+  _id: ObjectId
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+input UserInsertInput {
+  userId: String
+  _id: ObjectId
+  role: UserRole
+}
+
+input UserUpdateInput {
+  _id_unset: Boolean
+  role: UserRole
+  role_unset: Boolean
+  userId: String
+  userId_unset: Boolean
+  _id: ObjectId
+}
+
+input BookQueryInput {
+  price_nin: [Float]
+  _id_exists: Boolean
+  description_ne: String
+  authors_nin: [String]
+  description_gt: String
+  AND: [BookQueryInput!]
+  slug_lt: String
+  title: String
+  slug_gt: String
+  price_lte: Float
+  authors_exists: Boolean
+  title_exists: Boolean
+  price_ne: Float
+  slug_ne: String
+  OR: [BookQueryInput!]
+  slug_lte: String
+  description: String
+  price_lt: Float
+  authors: [String]
+  slug_in: [String]
+  _id_ne: ObjectId
+  _id_gt: ObjectId
+  _id_nin: [ObjectId]
+  price_gt: Float
+  description_exists: Boolean
+  slug_nin: [String]
+  description_gte: String
+  title_ne: String
+  description_lt: String
+  slug: String
+  price_exists: Boolean
+  slug_gte: String
+  description_lte: String
+  _id: ObjectId
+  _id_lt: ObjectId
+  title_lt: String
+  slug_exists: Boolean
+  title_in: [String]
+  price_in: [Float]
+  title_nin: [String]
+  price_gte: Float
+  title_gt: String
+  description_nin: [String]
+  title_gte: String
+  _id_lte: ObjectId
+  description_in: [String]
+  title_lte: String
+  _id_in: [ObjectId]
+  authors_in: [String]
+  price: Float
+  _id_gte: ObjectId
+}
+
+enum UserSortByInput {
+  USERID_DESC
+  _ID_ASC
+  _ID_DESC
+  ROLE_ASC
+  ROLE_DESC
+  USERID_ASC
 }
 
 type Mutation {
@@ -166,18 +165,43 @@ type Mutation {
   upsertOneUser(query: UserQueryInput, data: UserInsertInput!): User
 }
 
-input BookInsertInput {
+input UserQueryInput {
+  _id_lte: ObjectId
+  _id_exists: Boolean
+  userId: String
+  userId_lte: String
+  role_lt: UserRole
+  userId_gte: String
+  _id_ne: ObjectId
+  role_gt: UserRole
+  role_gte: UserRole
+  userId_lt: String
+  role_in: [UserRole]
+  userId_in: [String]
+  role_nin: [UserRole]
+  _id_in: [ObjectId]
+  _id_nin: [ObjectId]
+  role_ne: UserRole
+  OR: [UserQueryInput!]
+  userId_gt: String
+  _id_gte: ObjectId
+  role_exists: Boolean
   _id: ObjectId
-  description: String
-  slug: String
-  title: String
+  role_lte: UserRole
+  AND: [UserQueryInput!]
+  userId_nin: [String]
+  _id_gt: ObjectId
+  userId_exists: Boolean
+  role: UserRole
+  userId_ne: String
+  _id_lt: ObjectId
 }
 
-input UserUpdateInput {
-  role: UserRole
-  role_unset: Boolean
-  userId: String
-  userId_unset: Boolean
-  _id: ObjectId
-  _id_unset: Boolean
+enum UserRole {
+  ADMIN
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
 }

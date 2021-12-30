@@ -10,9 +10,11 @@
 export interface BooksQuery_books {
   __typename: "Book";
   _id: any | null;
+  title: string;
   description: string | null;
-  slug: string | null;
-  title: string | null;
+  slug: string;
+  authors: (string | null)[] | null;
+  price: number | null;
 }
 
 export interface BooksQuery {

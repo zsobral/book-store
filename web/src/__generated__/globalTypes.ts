@@ -8,10 +8,12 @@
 //==============================================================
 
 export interface BookInsertInput {
-  _id?: any | null;
   description?: string | null;
-  slug?: string | null;
-  title?: string | null;
+  slug: string;
+  title: string;
+  authors?: (string | null)[] | null;
+  price?: number | null;
+  _id?: any | null;
 }
 
 //==============================================================

@@ -13,5 +13,9 @@ export function RequireAdmin(props: RequireAdminProps) {
     }
   }, [router, user?.isAdmin]);
 
+  if (!user?.isAdmin) {
+    return null;
+  }
+
   return <>{props.children}</>;
 }

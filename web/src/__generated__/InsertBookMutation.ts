@@ -6,19 +6,21 @@
 import { BookInsertInput } from "./globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: InsertBook
+// GraphQL mutation operation: InsertBookMutation
 // ====================================================
 
-export interface InsertBook_insertOneBook {
+export interface InsertBookMutation_insertOneBook {
   __typename: "Book";
   _id: any | null;
-  title: string | null;
+  title: string;
+  description: string | null;
+  slug: string;
 }
 
-export interface InsertBook {
-  insertOneBook: InsertBook_insertOneBook | null;
+export interface InsertBookMutation {
+  insertOneBook: InsertBookMutation_insertOneBook | null;
 }
 
-export interface InsertBookVariables {
+export interface InsertBookMutationVariables {
   data: BookInsertInput;
 }
