@@ -1,26 +1,34 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 import { useAuth } from "../auth";
 
-export function TopBar() {
+function Navbar() {
   const { user, logout } = useAuth();
+  const canLogout = user && user.isAnonymous === false;
 
   return (
     <Box
+      as="nav"
       display="flex"
       alignItems="center"
       px="4"
-      height="64px"
+      height="56px"
       bg="white"
       borderBottomWidth="1px"
       borderBottomColor="gray.200"
       justifyContent="space-between"
     >
-      <Text fontSize="4xl" fontWeight="medium">
-        📚 book store
+      <Text fontSize="3xl" fontWeight="black">
+        SWE Books
       </Text>
-      <Button onClick={logout} variant="ghost">
-        logout
-      </Button>
+      <Box>
+        {canLogout ? (
+          <Button onClick={logout} variant="ghost">
+            Logout
+          </Button>
+        ) : null}
+      </Box>
     </Box>
   );
 }
+
+export { Navbar };

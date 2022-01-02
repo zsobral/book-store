@@ -4,16 +4,22 @@
             "bsonType": "objectId"
         },
         "authors": {
+            "additionalItems": false,
             "bsonType": "array",
             "items": {
                 "bsonType": "string"
-            }
+            },
+            "minItems": 1
         },
         "description": {
             "bsonType": "string"
         },
+        "imageUrl": {
+            "bsonType": "string"
+        },
         "price": {
-            "bsonType": "number"
+            "bsonType": "number",
+            "minimum": 0
         },
         "slug": {
             "bsonType": "string"
@@ -23,8 +29,12 @@
         }
     },
     "required": [
+        "_id",
         "title",
-        "slug"
+        "slug",
+        "authors",
+        "price",
+        "imageUrl"
     ],
     "title": "book"
 }

@@ -1,6 +1,6 @@
 import { Button, VStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { InputField } from "../fields";
+import { InputField } from "../components/fields";
 import { useAuth } from "./auth-provider";
 
 type FormData = {

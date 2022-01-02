@@ -10,10 +10,13 @@ const booksQuery = gql`
       slug
       authors
       price
+      imageUrl
     }
   }
 `;
 
-export function useBooks() {
+function useBooks() {
   return useQuery<BooksQuery>(booksQuery);
 }
+
+export { useBooks };

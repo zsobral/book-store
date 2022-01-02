@@ -1,24 +1,28 @@
-type DeleteManyPayload {
-  deletedCount: Int!
+enum UserSortByInput {
+  _ID_ASC
+  _ID_DESC
+  ROLE_ASC
+  ROLE_DESC
+  USERID_ASC
+  USERID_DESC
 }
 
-input BookUpdateInput {
-  authors: [String]
-  title_unset: Boolean
-  price_unset: Boolean
-  _id: ObjectId
-  description: String
-  authors_unset: Boolean
-  price_inc: Float
-  _id_unset: Boolean
-  slug_unset: Boolean
-  slug: String
-  title: String
-  price: Float
-  description_unset: Boolean
+enum UserRole {
+  ADMIN
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
 }
 
 scalar ObjectId
+
+input UserInsertInput {
+  userId: String
+  _id: ObjectId
+  role: UserRole
+}
 
 type Query {
   book(query: BookQueryInput): Book
@@ -28,25 +32,132 @@ type Query {
 }
 
 enum BookSortByInput {
-  _ID_ASC
-  TITLE_DESC
+  _ID_DESC
   SLUG_ASC
   SLUG_DESC
   TITLE_ASC
-  PRICE_ASC
+  TITLE_DESC
   PRICE_DESC
-  _ID_DESC
-  DESCRIPTION_ASC
+  IMAGEURL_ASC
+  _ID_ASC
   DESCRIPTION_DESC
+  PRICE_ASC
+  IMAGEURL_DESC
+  DESCRIPTION_ASC
+}
+
+input BookInsertInput {
+  description: String
+  slug: String!
+  title: String!
+  authors: [String]!
+  price: Float!
+  imageUrl: String!
+  _id: ObjectId
+}
+
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+
+input BookQueryInput {
+  _id_nin: [ObjectId]
+  slug_in: [String]
+  AND: [BookQueryInput!]
+  slug_ne: String
+  _id_gt: ObjectId
+  imageUrl_gte: String
+  title_gt: String
+  authors_in: [String]
+  slug_exists: Boolean
+  price_lte: Float
+  title_in: [String]
+  slug_nin: [String]
+  slug_lt: String
+  imageUrl_nin: [String]
+  imageUrl_ne: String
+  price_ne: Float
+  OR: [BookQueryInput!]
+  _id_in: [ObjectId]
+  description_ne: String
+  description_lte: String
+  title_gte: String
+  slug: String
+  _id: ObjectId
+  price_nin: [Float]
+  title_lt: String
+  imageUrl_in: [String]
+  imageUrl: String
+  imageUrl_exists: Boolean
+  title: String
+  price_gte: Float
+  description_gte: String
+  _id_lt: ObjectId
+  slug_gte: String
+  authors_exists: Boolean
+  slug_gt: String
+  price_lt: Float
+  title_exists: Boolean
+  description_gt: String
+  price_exists: Boolean
+  title_lte: String
+  description_exists: Boolean
+  description_lt: String
+  price_gt: Float
+  imageUrl_gt: String
+  description_nin: [String]
+  imageUrl_lt: String
+  _id_ne: ObjectId
+  title_ne: String
+  authors: [String]
+  price: Float
+  _id_gte: ObjectId
+  slug_lte: String
+  description: String
+  imageUrl_lte: String
+  title_nin: [String]
+  description_in: [String]
+  _id_exists: Boolean
+  authors_nin: [String]
+  _id_lte: ObjectId
+  price_in: [Float]
 }
 
 type Book {
-  _id: ObjectId
-  authors: [String]
+  _id: ObjectId!
+  authors: [String]!
   description: String
-  price: Float
+  imageUrl: String!
+  price: Float!
   slug: String!
   title: String!
+}
+
+input BookUpdateInput {
+  _id_unset: Boolean
+  _id: ObjectId
+  imageUrl: String
+  imageUrl_unset: Boolean
+  authors_unset: Boolean
+  title_unset: Boolean
+  slug_unset: Boolean
+  title: String
+  description: String
+  price: Float
+  description_unset: Boolean
+  price_unset: Boolean
+  slug: String
+  authors: [String]
+  price_inc: Float
+}
+
+input UserUpdateInput {
+  role: UserRole
+  role_unset: Boolean
+  userId: String
+  userId_unset: Boolean
+  _id: ObjectId
+  _id_unset: Boolean
 }
 
 type User {
@@ -55,95 +166,8 @@ type User {
   userId: String
 }
 
-input BookInsertInput {
-  description: String
-  slug: String!
-  title: String!
-  authors: [String]
-  price: Float
-  _id: ObjectId
-}
-
 type InsertManyPayload {
   insertedIds: [ObjectId]!
-}
-
-input UserInsertInput {
-  userId: String
-  _id: ObjectId
-  role: UserRole
-}
-
-input UserUpdateInput {
-  _id_unset: Boolean
-  role: UserRole
-  role_unset: Boolean
-  userId: String
-  userId_unset: Boolean
-  _id: ObjectId
-}
-
-input BookQueryInput {
-  price_nin: [Float]
-  _id_exists: Boolean
-  description_ne: String
-  authors_nin: [String]
-  description_gt: String
-  AND: [BookQueryInput!]
-  slug_lt: String
-  title: String
-  slug_gt: String
-  price_lte: Float
-  authors_exists: Boolean
-  title_exists: Boolean
-  price_ne: Float
-  slug_ne: String
-  OR: [BookQueryInput!]
-  slug_lte: String
-  description: String
-  price_lt: Float
-  authors: [String]
-  slug_in: [String]
-  _id_ne: ObjectId
-  _id_gt: ObjectId
-  _id_nin: [ObjectId]
-  price_gt: Float
-  description_exists: Boolean
-  slug_nin: [String]
-  description_gte: String
-  title_ne: String
-  description_lt: String
-  slug: String
-  price_exists: Boolean
-  slug_gte: String
-  description_lte: String
-  _id: ObjectId
-  _id_lt: ObjectId
-  title_lt: String
-  slug_exists: Boolean
-  title_in: [String]
-  price_in: [Float]
-  title_nin: [String]
-  price_gte: Float
-  title_gt: String
-  description_nin: [String]
-  title_gte: String
-  _id_lte: ObjectId
-  description_in: [String]
-  title_lte: String
-  _id_in: [ObjectId]
-  authors_in: [String]
-  price: Float
-  _id_gte: ObjectId
-}
-
-enum UserSortByInput {
-  USERID_DESC
-  _ID_ASC
-  _ID_DESC
-  ROLE_ASC
-  ROLE_DESC
-  USERID_ASC
 }
 
 type Mutation {
@@ -166,42 +190,33 @@ type Mutation {
 }
 
 input UserQueryInput {
-  _id_lte: ObjectId
-  _id_exists: Boolean
-  userId: String
-  userId_lte: String
-  role_lt: UserRole
-  userId_gte: String
-  _id_ne: ObjectId
-  role_gt: UserRole
-  role_gte: UserRole
-  userId_lt: String
-  role_in: [UserRole]
-  userId_in: [String]
-  role_nin: [UserRole]
-  _id_in: [ObjectId]
-  _id_nin: [ObjectId]
-  role_ne: UserRole
-  OR: [UserQueryInput!]
-  userId_gt: String
-  _id_gte: ObjectId
-  role_exists: Boolean
-  _id: ObjectId
-  role_lte: UserRole
   AND: [UserQueryInput!]
-  userId_nin: [String]
+  userId_lte: String
+  role_lte: UserRole
+  _id_ne: ObjectId
   _id_gt: ObjectId
+  role_lt: UserRole
+  _id_gte: ObjectId
+  role_ne: UserRole
+  _id_in: [ObjectId]
+  role_nin: [UserRole]
+  role_gte: UserRole
+  userId_ne: String
+  _id_nin: [ObjectId]
+  OR: [UserQueryInput!]
   userId_exists: Boolean
   role: UserRole
-  userId_ne: String
+  role_in: [UserRole]
+  userId_nin: [String]
+  _id_lte: ObjectId
+  role_gt: UserRole
   _id_lt: ObjectId
-}
-
-enum UserRole {
-  ADMIN
-}
-
-type UpdateManyPayload {
-  matchedCount: Int!
-  modifiedCount: Int!
+  userId: String
+  _id_exists: Boolean
+  userId_gte: String
+  role_exists: Boolean
+  userId_gt: String
+  userId_in: [String]
+  userId_lt: String
+  _id: ObjectId
 }

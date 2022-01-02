@@ -11,8 +11,9 @@ export interface BookInsertInput {
   description?: string | null;
   slug: string;
   title: string;
-  authors?: (string | null)[] | null;
-  price?: number | null;
+  authors: (string | null)[];
+  price: number;
+  imageUrl: string;
   _id?: any | null;
 }
 
