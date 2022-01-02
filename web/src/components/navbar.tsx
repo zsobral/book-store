@@ -1,5 +1,6 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 import { useAuth } from "../auth";
+import { Search } from "./search";
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -17,9 +18,12 @@ function Navbar() {
       borderBottomColor="gray.200"
       justifyContent="space-between"
     >
-      <Text fontSize="3xl" fontWeight="black">
+      <Text fontSize="3xl" fontWeight="black" pr="4">
         SWE Books
       </Text>
+      <Box flex="1" px="8">
+        <Search />
+      </Box>
       <Box>
         {canLogout ? (
           <Button onClick={logout} variant="ghost">
