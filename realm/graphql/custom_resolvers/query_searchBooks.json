@@ -1,0 +1,17 @@
+{
+    "field_name": "searchBooks",
+    "function_name": "searchBooksResolver",
+    "input_type": {
+        "properties": {
+            "search": {
+                "bsonType": "string"
+            }
+        },
+        "title": "SearchBooksInput",
+        "type": "object"
+    },
+    "input_type_format": "custom",
+    "on_type": "Query",
+    "payload_type": "Book",
+    "payload_type_format": "generated-list"
+}

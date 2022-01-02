@@ -3,11 +3,13 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { SearchBooksInput } from "./globalTypes";
+
 // ====================================================
-// GraphQL query operation: BooksQuery
+// GraphQL query operation: SearchBooks
 // ====================================================
 
-export interface BooksQuery_books {
+export interface SearchBooks_searchBooks {
   __typename: "Book";
   _id: any;
   title: string;
@@ -18,6 +20,10 @@ export interface BooksQuery_books {
   imageUrl: string;
 }
 
-export interface BooksQuery {
-  books: (BooksQuery_books | null)[];
+export interface SearchBooks {
+  searchBooks: (SearchBooks_searchBooks | null)[] | null;
+}
+
+export interface SearchBooksVariables {
+  input?: SearchBooksInput | null;
 }

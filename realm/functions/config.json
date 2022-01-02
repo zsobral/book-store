@@ -1,5 +1,9 @@
 [
     {
+        "name": "searchBooksResolver",
+        "private": false
+    },
+    {
         "name": "resetPasswordFunc",
         "private": true
     }

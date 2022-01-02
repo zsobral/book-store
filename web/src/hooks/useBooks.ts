@@ -1,9 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
-import { BooksQuery } from "../__generated__/BooksQuery";
+import {
+  SearchBooks,
+  SearchBooksVariables,
+} from "../__generated__/SearchBooks";
 
 const booksQuery = gql`
-  query BooksQuery {
-    books {
+  query SearchBooks($input: SearchBooksInput) {
+    searchBooks(input: $input) {
       _id
       title
       description
@@ -15,8 +18,10 @@ const booksQuery = gql`
   }
 `;
 
-function useBooks() {
-  return useQuery<BooksQuery>(booksQuery);
+function useBooks(input?: SearchBooksVariables["input"]) {
+  return useQuery<SearchBooks, SearchBooksVariables>(booksQuery, {
+    variables: { input },
+  });
 }
 
 export { useBooks };

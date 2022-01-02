@@ -1,10 +1,13 @@
 import { Box, Flex, StackDivider, Text, VStack } from "@chakra-ui/react";
+import { useAtomValue } from "jotai/utils";
+import { searchAtom } from "../atoms/search";
 import { useBooks } from "../hooks/useBooks";
-import { BooksQuery_books } from "../__generated__/BooksQuery";
+import { SearchBooks_searchBooks } from "../__generated__/SearchBooks";
 import { Card } from "./card";
 
 function Books() {
-  const { data, loading, error } = useBooks();
+  const search = useAtomValue(searchAtom);
+  const { data, loading, error } = useBooks({ search });
 
   if (loading) {
     return null;
@@ -13,8 +16,8 @@ function Books() {
   return (
     <Card>
       <VStack spacing="4" divider={<StackDivider borderColor="gray.200" />}>
-        {data?.books
-          .filter((book): book is BooksQuery_books => book !== null)
+        {data?.searchBooks
+          ?.filter((book): book is SearchBooks_searchBooks => book !== null)
           .map((book) => (
             <Flex key={book._id}>
               <Box width="200px" flexShrink="0">
