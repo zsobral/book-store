@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { useToast } from "@chakra-ui/react";
 import { AddBook, AddBookVariables } from "../__generated__/AddBook";
 
 const addBookMutation = gql`
@@ -16,7 +17,16 @@ const addBookMutation = gql`
 `;
 
 function useAddBook() {
-  return useMutation<AddBook, AddBookVariables>(addBookMutation);
+  const toast = useToast();
+
+  return useMutation<AddBook, AddBookVariables>(addBookMutation, {
+    onCompleted: () => {
+      toast({ status: "success", description: "Book added." });
+    },
+    onError: (error) => {
+      toast({ status: "error", description: error.message });
+    },
+  });
 }
 
 export { useAddBook };

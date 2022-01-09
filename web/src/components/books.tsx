@@ -1,4 +1,11 @@
-import { Box, Flex, StackDivider, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  StackDivider,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useAtomValue } from "jotai/utils";
 import { searchAtom } from "../atoms/search";
 import { useBooks } from "../hooks/useBooks";
@@ -7,7 +14,7 @@ import { Card } from "./card";
 
 function Books() {
   const search = useAtomValue(searchAtom);
-  const { data, loading, error } = useBooks({ search });
+  const { data, loading } = useBooks({ search });
 
   if (loading) {
     return null;
@@ -32,16 +39,16 @@ function Books() {
                 />
               </Box>
               <Box ml="8">
-                <Text fontSize="lg" fontWeight="medium">
+                <Heading as="h1" fontSize="lg" fontWeight="medium">
                   {book.title}
-                </Text>
-                <Text>by {book.authors.join()}</Text>
+                </Heading>
+                <Text as="div">by {book.authors.join()}</Text>
                 <Text my="2" fontSize="sm">
                   {book.description}
                 </Text>
-                <Text fontWeight="medium">{`$ ${
-                  book.price?.toFixed(2) ?? 0
-                }`}</Text>
+                <Text as="div" fontWeight="medium">
+                  $ {book.price.toFixed(2)}
+                </Text>
               </Box>
             </Flex>
           ))}

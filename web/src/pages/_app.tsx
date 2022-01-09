@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import { apolloClient } from "../apollo";
 import { RequireAdmin } from "../auth";
 
@@ -24,20 +24,15 @@ function MyAppProviders({ children }: { children: ReactNode }) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
-  if (router.pathname.startsWith("/admin")) {
-    return (
-      <MyAppProviders>
-        <RequireAdmin>
-          <Component {...pageProps} />
-        </RequireAdmin>
-      </MyAppProviders>
-    );
-  }
+  const GuardComponent = router.pathname.startsWith("/admin")
+    ? RequireAdmin
+    : Fragment;
 
   return (
     <MyAppProviders>
-      <Component {...pageProps} />
+      <GuardComponent>
+        <Component {...pageProps} />
+      </GuardComponent>
     </MyAppProviders>
   );
 }

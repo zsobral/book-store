@@ -1,14 +1,8 @@
-import {
-  Box,
-  Button,
-  HStack,
-  InputRightElement,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, HStack, VStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
 import { useAddBook } from "../hooks/useAddBook";
-import { InputField, NumberInputField, TextareaField } from "./fields";
+import { InputField, TextareaField } from "./fields";
 
 interface AddBookFormData {
   title: string;
@@ -43,7 +37,6 @@ export function AddBook() {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     await addBook({
       variables: {
         data: {
@@ -56,16 +49,6 @@ export function AddBook() {
         },
       },
     });
-    // await insert({
-    //   variables: {
-    //     data: {
-    //       ...data,
-    //       authors: [author],
-    //       slug: slugify(data.title),
-    //     },
-    //   },
-    // });
-    // reset();
   });
 
   return (
@@ -102,15 +85,16 @@ export function AddBook() {
           error={errors.imageUrl}
           {...register("imageUrl", { required: "Required" })}
         />
-        <NumberInputField
+        <InputField
           label="Price"
           id="price"
           type="number"
-          containerProps={{
-            min: 0,
-          }}
+          step="any"
           error={errors.price}
-          {...register("price", { required: "Required" })}
+          {...register("price", {
+            required: "Required",
+            min: { value: 0, message: "Minimum is 0" },
+          })}
         />
         <TextareaField
           label="Description"
@@ -119,8 +103,13 @@ export function AddBook() {
           {...register("description")}
         />
         <HStack justifyContent="flex-end" w="100%">
-          <Button type="button" variant="ghost" disabled={isSubmitting}>
-            Cancel
+          <Button
+            type="button"
+            variant="ghost"
+            disabled={isSubmitting}
+            onClick={() => reset()}
+          >
+            Reset
           </Button>
           <Button type="submit" colorScheme="green" isLoading={isSubmitting}>
             Add

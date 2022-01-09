@@ -5,13 +5,8 @@ import {
   forwardRef,
   Input,
   InputProps,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput as NumberInputContainer,
-  NumberInputField as NumberInput,
   NumberInputFieldProps as NumberInputProps,
   NumberInputProps as NumberInputContainerProps,
-  NumberInputStepper,
   Textarea,
   TextareaProps,
 } from "@chakra-ui/react";
@@ -55,22 +50,4 @@ const TextareaField = forwardRef((props: TextareaFieldProps, ref) => {
   );
 });
 
-const NumberInputField = forwardRef((props: NumberInputFieldProps, ref) => {
-  const { id, error, label, containerProps, ...inputProps } = props;
-
-  return (
-    <FormControl id={id} isInvalid={Boolean(error)}>
-      <FormLabel>{label}</FormLabel>
-      <NumberInputContainer {...containerProps}>
-        <NumberInput {...inputProps} ref={ref} />
-        <NumberInputStepper>
-          <NumberIncrementStepper />
-          <NumberDecrementStepper />
-        </NumberInputStepper>
-      </NumberInputContainer>
-      <FormErrorMessage>{error ? error.message : null}</FormErrorMessage>
-    </FormControl>
-  );
-});
-
-export { InputField, TextareaField, NumberInputField };
+export { InputField, TextareaField };
